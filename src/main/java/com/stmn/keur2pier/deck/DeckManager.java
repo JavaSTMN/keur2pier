@@ -1,17 +1,16 @@
 package com.stmn.keur2pier.deck;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.stmn.keur2pier.card.Card;
 import com.stmn.keur2pier.util.JSONUtils;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DeckManager {
 
@@ -74,10 +73,16 @@ public class DeckManager {
         Gson gson = new Gson();
         while (iterator.hasNext()) {
             Map.Entry pair = (Map.Entry)iterator.next();
-            jsonObject.put(pair.getKey(), gson.toJson(decks.get(pair.getKey()).getCards()));
+            jsonObject.put(pair.getKey(), gson.toJsonTree(decks.get(pair.getKey())));
             iterator.remove();
         }
         JSONUtils.writeJSON(jsonObject, new File("src/main/resources/json/decks").getAbsolutePath());
+    }
+
+    public Deck getDeckFromJSON(String deckName) throws IOException, ParseException{
+        JSONObject jsonObject = JSONUtils.readJSON(new File("src/main/resources/json/decks").getAbsolutePath());
+        Deck deck = new Deck(jsonObject, deckName);
+        return deck;
     }
 
     public JSONObject getCardCollection() {
