@@ -73,15 +73,15 @@ public class DeckManager {
         Gson gson = new Gson();
         while (iterator.hasNext()) {
             Map.Entry pair = (Map.Entry)iterator.next();
-            jsonObject.put(pair.getKey(), gson.toJsonTree(decks.get(pair.getKey()).getCards()));
+            jsonObject.put(pair.getKey(), gson.toJsonTree(decks.get(pair.getKey())));
             iterator.remove();
         }
         JSONUtils.writeJSON(jsonObject, new File("src/main/resources/json/decks").getAbsolutePath());
     }
 
     public Deck getDeckFromJSON(String deckName) throws IOException, ParseException{
-        JSONObject BLABLA = JSONUtils.readJSON(new File("src/main/ressources/json/decks").getAbsolutePath());
-        Deck deck = (Deck) BLABLA.get(deckName);
+        JSONObject jsonObject = JSONUtils.readJSON(new File("src/main/resources/json/decks").getAbsolutePath());
+        Deck deck = new Deck(jsonObject, deckName);
         return deck;
     }
 

@@ -33,7 +33,28 @@ public class DeckManagerTest {
         deckManager.addCard(deck, new Minion((JSONObject) deckManager.getCardCollection().get("3")));
         deckManager.addCard(deck, new Minion((JSONObject) deckManager.getCardCollection().get("3")));
         deckManager.createDeck(deck);
+
+        Hero nathanLeHero = new Hero(HeroClass.WARLOCK);
+        Deck leDeckDeNathan = new Deck("Nathan", nathanLeHero);
+        deckManager.addCard(leDeckDeNathan, new Spell((JSONObject) deckManager.getCardCollection().get("1")));
+        deckManager.addCard(leDeckDeNathan, new Minion((JSONObject) deckManager.getCardCollection().get("2")));
+        deckManager.addCard(leDeckDeNathan, new Minion((JSONObject) deckManager.getCardCollection().get("3")));
+        deckManager.addCard(leDeckDeNathan, new Minion((JSONObject) deckManager.getCardCollection().get("3")));
+        deckManager.addCard(leDeckDeNathan, new Minion((JSONObject) deckManager.getCardCollection().get("3")));
+        deckManager.createDeck(leDeckDeNathan);
+
+
         deckManager.writeToJSON();
         assertNotNull(JSONUtils.readJSON(new File("src/main/resources/json/decks").getAbsolutePath()));
+    }
+
+    @Test
+    public void getDeckFromJson() throws Exception {
+        Deck leDeckDeNathan = (new DeckManager().getDeckFromJSON("Nathan"));
+        Deck myTestDeck = (new DeckManager().getDeckFromJSON("drfcgfchfcgcf"));
+        assertNotNull(leDeckDeNathan);
+        assertNotNull(myTestDeck);
+        assertEquals("drfcgfchfcgcf", myTestDeck.getName());
+        assertEquals("Nathan", leDeckDeNathan.getName());
     }
 }
