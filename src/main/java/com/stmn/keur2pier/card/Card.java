@@ -17,7 +17,7 @@ public abstract class Card {
     protected Card(JSONObject jsonObject){
         this.name = (String) jsonObject.getOrDefault("name", "Name");
         this.effect = (String) jsonObject.getOrDefault("effect", "Effect");
-        this.manaCost = ((Long) jsonObject.getOrDefault("cost", 0)).intValue();
+        this.manaCost = ((Long) jsonObject.getOrDefault("cost", 0L)).intValue();
         this.illustration = setImage((String) jsonObject.getOrDefault("illustration", "default"));
         this.type = setType((String) jsonObject.getOrDefault("type", ""));
         this.rarity = setRarity((String) jsonObject.getOrDefault("rarity", ""));
