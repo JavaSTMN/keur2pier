@@ -24,11 +24,6 @@ public class Board {
     }
 
     public void removeMinion(Card minion){
-        minion.destroy();
         minions.remove(minion);
-    }
-
-    public List<Card> getMinions() {
-        return minions;
     }
 }

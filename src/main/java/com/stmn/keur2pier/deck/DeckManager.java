@@ -36,7 +36,6 @@ public class DeckManager {
         decks.remove(deck.getName());
     }
 
-
     public boolean removeCard(Deck deck, Card card){
         List<Card> cards = deck.getCards();
         for (Card c : cards){
@@ -74,7 +73,7 @@ public class DeckManager {
         Gson gson = new Gson();
         while (iterator.hasNext()) {
             Map.Entry pair = (Map.Entry)iterator.next();
-            jsonObject.put(pair.getKey(), gson.toJson(decks.get(pair.getKey()).getCards()));
+            jsonObject.put(pair.getKey(), gson.toJson(decks.get(pair.getKey())));
             iterator.remove();
         }
         JSONUtils.writeJSON(jsonObject, new File("src/main/resources/json/decks").getAbsolutePath());

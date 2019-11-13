@@ -8,8 +8,6 @@ import java.util.List;
 
 public class Deck {
 
-    private final int MAX_SIZE = 20;
-
     private String name;
     private List<Card> cards;
     private Hero hero;
@@ -36,12 +34,8 @@ public class Deck {
         return cards.size();
     }
 
-    public boolean addCard(Card card){
-        if(getCardCount() < MAX_SIZE){
-            cards.add(card);
-            return true;
-        }
-        return false;
+    public void addCard(Card card){
+        cards.add(card);
     }
 
     public Card removeAtIndex(int index){

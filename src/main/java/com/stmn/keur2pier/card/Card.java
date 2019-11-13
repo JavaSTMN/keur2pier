@@ -1,24 +1,22 @@
 package com.stmn.keur2pier.card;
 
-import com.stmn.keur2pier.Board;
+import com.stmn.keur2pier.Player;
 import org.json.simple.JSONObject;
-
-import java.awt.*;
 
 public abstract class Card {
 
     protected String name;
     protected String effect;
     protected int manaCost;
-    protected Image illustration;
+    protected String image;
     protected CardClass type;
     protected Rarity rarity;
 
     protected Card(JSONObject jsonObject){
         this.name = (String) jsonObject.getOrDefault("name", "Name");
         this.effect = (String) jsonObject.getOrDefault("effect", "Effect");
-        this.manaCost = ((Long) jsonObject.getOrDefault("cost", 0)).intValue();
-        this.illustration = setImage((String) jsonObject.getOrDefault("illustration", "default"));
+        this.manaCost = ((Long) jsonObject.getOrDefault("cost", 0L)).intValue();
+        this.image = (String) jsonObject.getOrDefault("illustration", "default.png");
         this.type = setType((String) jsonObject.getOrDefault("type", ""));
         this.rarity = setRarity((String) jsonObject.getOrDefault("rarity", ""));
     }
@@ -76,11 +74,11 @@ public abstract class Card {
         }
     }
 
-    private Image setImage(String imageName){
-        return null;
+    public void playCard(Player owner){
+
     }
 
-    public void destroy(){
+    public void destroy(Player owner){
 
     }
 
@@ -88,16 +86,12 @@ public abstract class Card {
         return name;
     }
 
-    public String getEffect() {
-        return effect;
-    }
-
     public int getManaCost() {
         return manaCost;
     }
 
-    public Image getIllustration() {
-        return illustration;
+    public String getImage() {
+        return image;
     }
 
     public CardClass getType() {

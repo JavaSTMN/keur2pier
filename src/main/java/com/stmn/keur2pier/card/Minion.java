@@ -2,6 +2,7 @@ package com.stmn.keur2pier.card;
 
 import com.stmn.keur2pier.Board;
 import com.stmn.keur2pier.IFighter;
+import com.stmn.keur2pier.Player;
 import org.json.simple.JSONObject;
 
 public class Minion extends Card implements IFighter {
@@ -16,9 +17,16 @@ public class Minion extends Card implements IFighter {
         this.attackPoint = ((Long) jsonObject.getOrDefault("attack", 0L)).intValue();
     }
 
-    public void playMinion(Board board) {
-        board.addMinion(this);
+    @Override
+    public void playCard(Player owner){
+        owner.getBoard().addMinion(this);
         this.hasAttacked = true;
+    }
+
+    @Override
+    public void destroy(Player owner){
+        owner.getBoard().removeMinion(this);
+        die();
     }
 
     @Override
