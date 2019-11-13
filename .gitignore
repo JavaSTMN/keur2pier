@@ -17,7 +17,7 @@
 # Gradle cache directory
 .gradle/
 
-#.idea/
+.idea/
 
 # Crashlytics generated file
 crashlytics-build.properties
