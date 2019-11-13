@@ -36,12 +36,8 @@ public class Deck {
         return cards.size();
     }
 
-    public boolean addCard(Card card){
-        if(getCardCount() < MAX_SIZE){
-            cards.add(card);
-            return true;
-        }
-        return false;
+    public void addCard(Card card){
+        cards.add(card);
     }
 
     public Card removeAtIndex(int index){
