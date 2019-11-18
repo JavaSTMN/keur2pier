@@ -1,22 +1,12 @@
 {
   "1": {
     "id": "1",
-    "name": "Malfurion",
-    "illustration": "malfurion"
+    "name": "Bruh Cat",
+    "illustration": "bruh_cat.jpg"
   },
   "2": {
     "id": "2",
-    "name": "Gul'Dan",
-    "illustration": "guldan"
-  },
-  "3": {
-    "id": "3",
-    "name": "Jaina",
-    "illustration": "jaina"
-  },
-  "4": {
-    "id": "4",
-    "name": "Uther",
-    "illustration": "uther"
+    "name": "Yelling Girl",
+    "illustration": "yelling_girl.jpg"
   }
 }

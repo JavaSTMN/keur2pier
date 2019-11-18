@@ -1,103 +1,253 @@
 {
   "1": {
-    "name": "The Coin",
-    "description": "Gain 1 Mana Crystal this turn only.",
+    "name": "Doge Coin",
+    "description": "Vous recevez un cristal de mana pour ce tour uniquement.",
     "cardClass": "NEUTRAL",
     "rarity": "FREE",
     "manaCost": 0,
     "type": "SPELL",
     "mechanics": {
-      "class": "SpellEffect.addManaForTurn",
-      "mana": 1
-    }
+      "method": "gainMana",
+      "amount": 1
+    },
+    "image": "doge_coin.png"
   },
   "2":{
-    "name": "Abomination",
-    "description": "Taunt. Deathrattle: Deal 2 damage to ALL characters.",
+    "name": "AH !",
+    "description": "Inflige un point de dégât à trois ennemis alétoires.",
+    "cardClass": "NEUTRAL",
+    "rarity": "RARE",
+    "manaCost": 1,
+    "type": "SPELL",
+    "mechanics": {
+      "method": "dealDamageToRandom",
+      "target": 3,
+      "damage": 1
+    },
+    "image": "ah.jpg"
+  },
+  "3": {
+    "name": "Arouf Gangsta",
+    "description": "Jsuis plus beau que toi.",
+    "cardClass": "NEUTRAL",
+    "rarity": "FREE",
+    "manaCost": 1,
+    "type": "MINION",
+    "attack": 1,
+    "health": 2,
+    "image": "arouf.jpg"
+  },
+  "4": {
+    "name": "Back Spiderman",
+    "description": "Cri de guerre: Inflige 2 points de dégâts au héros adverse.",
+    "cardClass": "BRUHCAT",
+    "rarity": "RARE",
+    "manaCost": 3,
+    "type": "MINION",
+    "attack": 5,
+    "health": 1,
+    "mechanics": {
+      "battleCry": {
+        "method": "dealDamageToOpponent",
+        "damage": 2
+      }
+    },
+    "image": "back_spider.jpg"
+  },
+  "5": {
+    "name": "Front Spiderman",
+    "description": "Cri de guerre: Inflige 2 points de dégâts au héros adverse.",
+    "cardClass": "YELLINGGIRL",
+    "rarity": "RARE",
+    "manaCost": 3,
+    "type": "MINION",
+    "attack": 1,
+    "health": 5,
+    "mechanics": {
+      "battleCry": {
+       "method": "dealDamageToOpponent",
+       "damage": 2
+      }
+    },
+    "image": "front_spider.jpg"
+  },
+  "6": {
+    "name": "Big Baby",
+    "description": "Provocation",
+    "cardClass": "NEUTRAL",
+    "rarity": "EPIC",
+    "manaCost": 7,
+    "type": "MINION",
+    "attack": 6,
+    "health": 10,
+    "mechanics": {
+      "taunt": true
+    },
+    "image": "big_baby.jpg"
+  },
+  "7": {
+    "name": "Big Shak",
+    "description": "You don't know.",
     "cardClass": "NEUTRAL",
     "rarity": "RARE",
     "manaCost": 5,
     "type": "MINION",
-    "attack": 4,
+    "attack": 3,
     "health": 4,
     "mechanics": {
-      "taunt": true,
-      "deathRattle": {
-        "method": "dealDamageToAll",
-        "damage": 2
-      }
-    }
+     "method": "buffAllies",
+     "health": 1
+    },
+    "image": "big_shak.jpg"
   },
-  "3": {
-    "name": "Tundra Rhino",
-    "description": "Your Beasts have Charge.",
-    "cardClass": "HUNTER",
-    "rarity": "FREE",
-    "manaCost": 5,
-    "type": "MINION",
-    "attack": 2,
-    "health": 5,
-    "mechanics": {
+  "8": {
+   "name": "Crak Kid",
+   "description": "YAAAAAAAH.",
+   "cardClass": "NEUTRAL",
+   "rarity": "LEGENDARY",
+   "manaCost": 6,
+   "type": "MINION",
+   "attack": 6,
+   "health": 6,
+   "mechanics": {
+    "method": "dealDamageToAll",
+    "damage": 3
+   },
+   "image": "crack_kid.jpg"
+  },
+  "9": {
+   "name": "Darude Sandstorm",
+   "description": "Inflige 2 points de dégâts à tous les serviteurs. Recommence à chaque fois qu'un serviteur meurt.",
+   "cardClass": "NEUTRAL",
+   "rarity": "RARE",
+   "manaCost": 3,
+   "type": "SPELL",
+   "mechanics": {
+    "method": "dealDamageRepeatable",
+    "damage": 2
+   },
+   "image": "darude.jpg"
+  },
+  "10": {
+   "name": "Dolan",
+   "description": "Charge. Bouclier divin",
+   "cardClass": "NEUTRAL",
+   "rarity": "RARE",
+   "manaCost": 4,
+   "type": "MINION",
+   "attack": 4,
+   "health": 2,
+   "mechanics": {
+    "charge": true,
+    "divineShield": true
+   },
+   "image": "dolan.jpg"
+  },
+  "11": {
+   "name": "Elon Musk",
+   "description": "Cri de guerre: ajoute 2 d'attaque aux serviteurs alliés.",
+   "cardClass": "NEUTRAL",
+   "rarity": "LEGENDARY",
+   "manaCost": 7,
+   "type": "MINION",
+   "attack": 5,
+   "health": 5,
+   "mechanics": {
+    "battleCry": {
+     "method": "buffAllies",
+     "attack": 2
+    }
+   },
+   "image": "elon.jpg"
+  },
+  "12": {
+   "name": "Tinkles",
+   "description": "Invoque 2 Tinkle.",
+   "cardClass": "NEUTRAL",
+   "rarity": "FREE",
+   "manaCost": 1,
+   "type": "SPELL",
+   "mechanics": {
+    "method": "summonMinions",
+    "minionId": 13
+   },
+   "image": "gae.jpg"
+  },
+  "13": {
+   "name": "Tinkle",
+   "description": "Provocation.  I'm GAE!",
+   "cardClass": "NEUTRAL",
+   "rarity": "FREE",
+   "manaCost": 0,
+   "type": "MINION",
+   "attack": 0,
+   "health": 2,
+   "mechanics": {
+    "taunt": true
+   },
+   "image": "gae.jpg"
+ },
+ "14": {
+  "name": "Gavin",
+  "description": "Provocation.  Râle d'agonie: inflige 10 points de dégâts à un ennemi aléatoire.",
+  "cardClass": "NEUTRAL",
+  "rarity": "LEGENDARY",
+  "manaCost": 6,
+  "type": "MINION",
+  "attack": 3,
+  "health": 3,
+  "mechanics": {
+   "taunt": true,
+   "deathRattle": {
+    "method": "dealDamageToRandom",
+    "target": 1,
+    "damage": 10
+   }
+  },
+  "image": "gavin.jpg"
+ },
+ "15": {
+   "name": "Un groupe de musique",
+   "description": "Râle d'agonie: Ajoute 1 point de vie à tous les serviteurs alliés.",
+   "cardClass": "NEUTRAL",
+   "rarity": "EPIC",
+   "manaCost": 3,
+   "type": "MINION",
+   "attack": 1,
+   "health": 3,
+   "mechanics": {
+    "deathRattle": {
+     "method": "buffAllies",
+     "health": 1
+    }
+   },
+   "image": "groupe_musique.png"
+  },
+  "16": {
+     "name": "Hackerman",
+     "description": "Bouclier divin.  Cri de guerre: Inflige 1 points de dégât au héros adverse.",
+     "cardClass": "NEUTRAL",
+     "rarity": "RARE",
+     "manaCost": 3,
+     "type": "MINION",
+     "attack": 3,
+     "health": 2,
+     "mechanics": {
       "battleCry": {
-        "class": "Auras.sameBoardAura",
-        "filter": "MinionAuras.TARGET_IS_BEAST",
-        "aura": "MinionAuras.CHARGE"
-      },
-    }
-  },
-  "4": {
-    "name": "Tirion Fordring",
-    "description": "Divine Shield. Taunt. Deathrattle: Equip a 5/3 Ashbringer.",
-    "cardClass": "PALADIN",
-    "rarity": "LEGENDARY",
-    "manaCost": 8,
-    "type": "MINION",
-    "attack": 6,
-    "health": 6,
-    "mechanics": {
-      "taunt": true,
-      "divineShield": true,
-      "deathRattle": {
-        "class": "TargetlessActions.equipWeapon",
-        "weapon": "Ashbringer"
+       "method": "dealDamageToOpponent",
+       "damage": 1
       }
+     },
+     "image": "hackerman.png"
+    },
+    "17": {
+     "name": "Hamburger",
+     "cardClass": "YELLINGGIRL",
+     "rarity": "RARE",
+     "manaCost": 3,
+     "type": "WEAPON",
+     "attack": 1,
+     "durability": 7,
+     "image": "hamburger.png"
     }
-  },
-  "5": {
-    "name": "Treant",
-    "description": "Charge. At the end of the turn, destroy this minion.",
-    "cardClass": "DRUID",
-    "rarity": "EPIC",
-    "manaCost": 1,
-    "type": "MINION",
-    "attack": 2,
-    "health": 2,
-    "mechanics": {
-      "turn-ends": {
-        "filter": "BasicFilters.HAS_SAME_OWNER_PLAYER",
-        "action": "TargetlessActions.SELF_DESTRUCT"
-      }
-    }
-  },
-  "6": {
-    "name": "Tree of Life",
-    "description": "Restore all characters to full Health.",
-    "cardClass": "DRUID",
-    "rarity": "EPIC",
-    "manaCost": 9,
-    "type": "SPELL",
-    "mechanics": {
-      "method": ""
-    }
-  },
-  "7": {
-    "name": "Truesilver Champion",
-    "description": "Whenever your hero attacks, restore 2 Health to it.",
-    "cardClass": "PALADIN",
-    "rarity": "FREE",
-    "manaCost": 4,
-    "type": "WEAPON",
-    "attack": 2,
-    "durability": 2
-  }
 }
