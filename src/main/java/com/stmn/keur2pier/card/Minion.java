@@ -7,6 +7,10 @@ import org.json.simple.JSONObject;
 
 public class Minion extends Card implements IFighter {
 
+    public int getHealth() {
+        return health;
+    }
+
     private int health;
     private int attack;
     private boolean hasAttacked;

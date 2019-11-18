@@ -27,7 +27,7 @@ public class Abilities {
             countdown = false;
             for(Minion minion : minions){
                 minion.takeDamage(value);
-                if(minion.getHealthPoint() == 0){
+                if(minion.getHealth() == 0){
                     countdown = true;
                 }
             }
@@ -46,13 +46,43 @@ public class Abilities {
 
     public static void onMinionDeathPickACard(int value, Minion minion, Player player){
         minion.takeDamage(value);
-        if (minion.getHealthPoint() == 0){
+        if (minion.getHealth() == 0){
             player.draw(1);
         }
     }
 
-    public static void theLolCatCall(int minionId,int nbMinionToSpawn, Board theBoard){
-        theBoard.addMinion()
+    public static void attackEveryThings(int value,List<IFighter> fighters){
+        for (IFighter fighter : fighters ) {
+            fighter.takeDamage(value);
+        }
     }
 
+    public static void attackAsMuchAsYouHaveMana(List<Minion> minions, Player player){
+        int randomNum;
+        randomNum = ThreadLocalRandom.current().nextInt(1,minions.size()+1);
+        minions.get(randomNum).takeDamage(player.getManaRemaining());
+    }
+
+    public static void theCoin(Player owner, int value){
+        Game theGame = Game.getInstance();
+        Player current = theGame.getCurrentPlayer();
+        owner.setManaPool(owner.getManaRemaining()+1);
+        boolean playerHasChanged = false;
+        while (!playerHasChanged){
+            current = theGame.getCurrentPlayer();
+            if(current != owner){
+                playerHasChanged = true;
+            }
+        }
+        owner.setManaPool(owner.getManaRemaining()-1);
+    }
+
+    public static void addManaRemaining(Player owner,int value){
+        if (!(owner.getManaRemaining()== 10)){
+            owner.setManaRemaining(owner.getManaRemaining()+1);
+        } else{
+            owner.draw(1);
+        }
+    }
 }
+
