@@ -1,37 +1,45 @@
 package com.stmn.keur2pier.deck;
 
 import com.stmn.keur2pier.card.Card;
+import com.stmn.keur2pier.card.CardManager;
+import com.stmn.keur2pier.card.Minion;
 import com.stmn.keur2pier.hero.Hero;
+import com.stmn.keur2pier.hero.HeroClass;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Deck {
 
-    private final int MAX_SIZE = 20;
-
     private String name;
     private List<Card> cards;
-    private Hero hero;
+    private HeroClass heroClass;
 
     public Deck(JSONObject jsonObject, String deckName){
-        this.name = (String) deckName;
-        JSONArray myArray = (JSONArray) jsonObject.getOrDefault("cards",null);
-        if(myArray != null){
-            for (Object o : myArray){
-                this.cards.add((Card)o);
+        this.name = deckName;
+        this.cards = new ArrayList<>();
+        CardManager cardManager = new CardManager();
+        JSONArray jsonArray = (JSONArray) jsonObject.getOrDefault("cards",null);
+        if(jsonArray != null){
+            for (Object o : jsonArray){
+                this.cards.add(cardManager.createFromJSON((JSONObject) o));
             }
         }
-        this.hero = (Hero) jsonObject.getOrDefault("hero",null);
+        this.heroClass = HeroClass.valueOf((String) jsonObject.get("heroClass"));
 
     }
 
-    public Deck(String name, Hero hero){
+    public Deck(String name, HeroClass hero){
         this.name = name;
-        this.hero = hero;
-        this.cards = new ArrayList<Card>();
+        this.heroClass = hero;
+        this.cards = new ArrayList<>();
+    }
+
+    public void shuffle(){
+        Collections.shuffle(this.cards);
     }
 
     public String getName() {
@@ -40,10 +48,6 @@ public class Deck {
 
     public List<Card> getCards() {
         return cards;
-    }
-
-    public Hero getHero() {
-        return hero;
     }
 
     public int getCardCount(){
@@ -56,5 +60,9 @@ public class Deck {
 
     public Card removeAtIndex(int index){
         return cards.remove(index);
+    }
+
+    public HeroClass getHeroClass() {
+        return heroClass;
     }
 }

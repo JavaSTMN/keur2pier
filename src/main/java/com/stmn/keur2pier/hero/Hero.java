@@ -15,10 +15,10 @@ public class Hero implements IFighter {
     private boolean hasAttacked;
 
     public Hero(HeroClass heroClass) {
+        this.heroClass = heroClass;
         this.weapon = null;
         this.health = MAX_HEALTH;
         this.armor = START_ARMOR;
-        this.heroClass = heroClass;
         this.hasAttacked = false;
     }
 
@@ -35,9 +35,9 @@ public class Hero implements IFighter {
     @Override
     public void attack(IFighter target) {
         if(weapon != null && !hasAttacked){
-            target.takeDamage(weapon.getAttackPoint());
+            target.takeDamage(weapon.getAttack());
             takeDamage(target.getAttack());
-            weapon.setDurability(weapon.getDurability() - 1);
+            weapon.loseDurability(1, this);
             hasAttacked = true;
         }
     }
@@ -45,8 +45,8 @@ public class Hero implements IFighter {
     @Override
     public void takeDamage(int damage) {
         armor -= damage;
-        if(armor <= 0) {
-            damage = armor;
+        if(armor < 0) {
+            damage = -armor;
             armor = 0;
         }
         health -= damage;
@@ -58,7 +58,7 @@ public class Hero implements IFighter {
     @Override
     public int getAttack() {
         if(weapon != null){
-            return weapon.getAttackPoint();
+            return weapon.getAttack();
         }
         return 0;
     }
@@ -91,4 +91,5 @@ public class Hero implements IFighter {
     public void setArmor(int armor) {
         this.armor = armor;
     }
+
 }

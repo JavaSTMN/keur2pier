@@ -1,6 +1,6 @@
 package com.stmn.keur2pier;
 
-import com.stmn.keur2pier.card.Card;
+import com.stmn.keur2pier.card.Minion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,26 +9,23 @@ public class Board {
 
     private static final int MAX_CAPACITY = 7;
 
-    private List<Card> minions;
+    private final List<Minion> minions;
 
     public Board(){
         this.minions = new ArrayList<>(MAX_CAPACITY);
     }
 
-    public boolean addMinion(Card minion){
+    public void addMinion(Minion minion){
         if(minions.size() < MAX_CAPACITY){
             minions.add(minion);
-            return true;
         }
-        return false;
     }
 
-    public void removeMinion(Card minion){
-        minion.destroy();
+    public void removeMinion(Minion minion){
         minions.remove(minion);
     }
 
-    public List<Card> getMinions() {
+    public List<Minion> getMinions() {
         return minions;
     }
 }

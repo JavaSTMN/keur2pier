@@ -1,2 +1,5 @@
 rootProject.name = 'keur2pier'
+include 'test'
+findProject(':test')?.name = 'keur2pier'
+include 'test'
 

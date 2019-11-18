@@ -2,123 +2,103 @@
   "1": {
     "name": "The Coin",
     "description": "Gain 1 Mana Crystal this turn only.",
-    "class": "neutral",
-    "rarity": "free",
+    "cardClass": "NEUTRAL",
+    "rarity": "FREE",
     "manaCost": 0,
-    "spell": {
-      "class": "TargetlessActions.gainMana",
+    "type": "SPELL",
+    "mechanics": {
+      "class": "Ability.gainMana",
       "mana": 1
     }
   },
   "2":{
     "name": "Abomination",
     "description": "Taunt. Deathrattle: Deal 2 damage to ALL characters.",
-    "class": "neutral",
-    "rarity": "rare",
+    "cardClass": "NEUTRAL",
+    "rarity": "RARE",
     "manaCost": 5,
-    "minion": {
-      "attack": 4,
-      "hp": 4,
-      "mechanics": {
-        "taunt": true,
-        "deathRattle": {
-          "class": "TargetlessActions.damageTarget",
-          "selector": "EntitySelectors.allTargetsAlive",
-          "damage": 2
-        }
-      },
+    "type": "MINION",
+    "attack": 4,
+    "health": 4,
+    "mechanics": {
+      "taunt": true,
+      "deathRattle": {
+        "class": "TargetlessActions.damageTarget",
+        "selector": "EntitySelectors.allTargetsAlive",
+        "damage": 2
+      }
     }
   },
   "3": {
     "name": "Tundra Rhino",
     "description": "Your Beasts have Charge.",
-    "class": "hunter",
-    "keywords": "beast",
+    "cardClass": "HUNTER",
+    "rarity": "FREE",
     "manaCost": 5,
-    "minion": {
-      "attack": 2,
-      "hp": 5,
-      "mechanics": {
-        "ability": {
-          "class": "Auras.sameBoardAura",
-          "filter": "MinionAuras.TARGET_IS_BEAST",
-          "aura": "MinionAuras.CHARGE"
-        },
-      }
+    "type": "MINION",
+    "attack": 2,
+    "health": 5,
+    "mechanics": {
+      "battleCry": {
+        "class": "Auras.sameBoardAura",
+        "filter": "MinionAuras.TARGET_IS_BEAST",
+        "aura": "MinionAuras.CHARGE"
+      },
     }
   },
   "4": {
     "name": "Tirion Fordring",
     "description": "Divine Shield. Taunt. Deathrattle: Equip a 5/3 Ashbringer.",
-    "class": "paladin",
-    "rarity": "legendary",
+    "cardClass": "PALADIN",
+    "rarity": "LEGENDARY",
     "manaCost": 8,
-    "minion": {
-      "attack": 6,
-      "hp": 6,
-      "mechanics": {
-        "taunt": true,
-        "divineShield": true,
-        "deathRattle": {
-          "class": "TargetlessActions.equipWeapon",
-          "weapon": "Ashbringer"
-        }
-      },
+    "type": "MINION",
+    "attack": 6,
+    "health": 6,
+    "mechanics": {
+      "taunt": true,
+      "divineShield": true,
+      "deathRattle": {
+        "class": "TargetlessActions.equipWeapon",
+        "weapon": "Ashbringer"
+      }
     }
   },
   "5": {
-    "name": "Treant/Charge",
-    "displayName": "Treant",
+    "name": "Treant",
     "description": "Charge. At the end of the turn, destroy this minion.",
-    "class": "druid",
-    "collectible": false,
+    "cardClass": "DRUID",
+    "rarity": "EPIC",
     "manaCost": 1,
-    "minion": {
-      "displayName": "Treant",
-      "attack": 2,
-      "hp": 2,
-      "mechanics": {
-        "turn-ends": {
-          "filter": "BasicFilters.HAS_SAME_OWNER_PLAYER",
-          "action": "TargetlessActions.SELF_DESTRUCT"
-        }
+    "type": "MINION",
+    "attack": 2,
+    "health": 2,
+    "mechanics": {
+      "turn-ends": {
+        "filter": "BasicFilters.HAS_SAME_OWNER_PLAYER",
+        "action": "TargetlessActions.SELF_DESTRUCT"
       }
     }
   },
   "6": {
     "name": "Tree of Life",
     "description": "Restore all characters to full Health.",
-    "class": "druid",
-    "rarity": "epic",
+    "cardClass": "DRUID",
+    "rarity": "EPIC",
     "manaCost": 9,
-    "spell": {
-      "class": "TargetlessActions.forTargets",
-      "action": "TargetedActions.FULL_HEAL",
-      "selector": "EntitySelectors.allTargets"
+    "type": "SPELL",
+    "mechanics": {
+      "method": ""
     }
   },
   "7": {
     "name": "Truesilver Champion",
     "description": "Whenever your hero attacks, restore 2 Health to it.",
-    "class": "paladin",
+    "cardClass": "PALADIN",
+    "rarity": "FREE",
     "manaCost": 4,
-    "weapon": {
-      "attack": 4,
-      "charges": 2,
-      "triggers": {
-        "attack-initiated": {
-          "priority": "low",
-          "filter": [
-            "BasicFilters.ATTACKER_IS_OWNER",
-            "BasicFilters.ATTACKER_IS_HERO"
-          ],
-          "action": {
-            "class": "TargetlessActions.damageTarget",
-            "selector": "EntitySelectors.friendlyHero",
-            "damage": -2
-          }
-        }
-      }
-    }
+    "type": "WEAPON",
+    "attack": 2,
+    "durability": 2
   }
 }
