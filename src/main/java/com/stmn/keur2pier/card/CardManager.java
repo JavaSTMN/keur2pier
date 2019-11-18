@@ -23,6 +23,11 @@ public class CardManager {
         JSONObject card = (JSONObject) cards.get(id);
         return createFromJSON(card);
     }
+
+    public JSONObject getJSONFromId(String id){
+        return (JSONObject) cards.get(id);
+    }
+
     public Card createFromJSON(JSONObject card){
         switch ((String) card.get("type")){
             case "MINION":

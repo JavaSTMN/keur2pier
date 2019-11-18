@@ -1,37 +1,48 @@
 package com.stmn.keur2pier.card;
 
-import com.stmn.keur2pier.Board;
 import com.stmn.keur2pier.IFighter;
 import com.stmn.keur2pier.Player;
 import org.json.simple.JSONObject;
 
 public class Minion extends Card implements IFighter {
 
+    public int getHealth() {
+        return health;
+    }
+
     private int health;
     private int attack;
     private boolean hasAttacked;
 
-    private Mechanics mechanics;
+    private MinionMechanics minionMechanics;
 
     public Minion(JSONObject jsonObject) {
         super(jsonObject);
         this.health = ((Long) jsonObject.getOrDefault("health", 0L)).intValue();
         this.attack = ((Long) jsonObject.getOrDefault("attack", 0L)).intValue();
         if(jsonObject.containsKey("mechanics")){
-            this.mechanics = new Mechanics((JSONObject) jsonObject.get("mechanics"));
+            this.minionMechanics = new MinionMechanics((JSONObject) jsonObject.get("mechanics"));
         } else {
-            this.mechanics = null;
+            this.minionMechanics = null;
         }
     }
 
     @Override
     public void playCard(Player owner){
         owner.getBoard().addMinion(this);
-        this.hasAttacked = true;
+        if(minionMechanics != null){
+            this.hasAttacked = !minionMechanics.isCharge();
+            minionMechanics.battleCry(owner);
+        } else {
+            this.hasAttacked = true;
+        }
     }
 
-    public void destroy(Board board){
-        board.removeMinion(this);
+    public void destroy(Player owner){
+        if(minionMechanics != null){
+            minionMechanics.deathRattle(owner);
+        }
+        owner.getBoard().removeMinion(this);
         die();
     }
 
@@ -54,9 +65,13 @@ public class Minion extends Card implements IFighter {
 
     @Override
     public void takeDamage(int damage) {
-        health -= damage;
-        if (health <= 0){
-            die();
+        if (minionMechanics != null && minionMechanics.isDivineShield()) {
+            minionMechanics.setDivineShield(false);
+        } else {
+            health -= damage;
+            if (health <= 0){
+                die();
+            }
         }
     }
 
@@ -68,5 +83,21 @@ public class Minion extends Card implements IFighter {
     @Override
     public void die() {
 
+    }
+
+    public MinionMechanics getMinionMechanics() {
+        return minionMechanics;
+    }
+
+    public boolean isHasAttacked() {
+        return hasAttacked;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
     }
 }

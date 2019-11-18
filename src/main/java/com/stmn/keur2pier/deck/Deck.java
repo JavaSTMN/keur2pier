@@ -2,8 +2,6 @@ package com.stmn.keur2pier.deck;
 
 import com.stmn.keur2pier.card.Card;
 import com.stmn.keur2pier.card.CardManager;
-import com.stmn.keur2pier.card.Minion;
-import com.stmn.keur2pier.hero.Hero;
 import com.stmn.keur2pier.hero.HeroClass;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

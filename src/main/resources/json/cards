@@ -7,7 +7,7 @@
     "manaCost": 0,
     "type": "SPELL",
     "mechanics": {
-      "class": "Ability.gainMana",
+      "class": "SpellEffect.addManaForTurn",
       "mana": 1
     }
   },
@@ -23,8 +23,7 @@
     "mechanics": {
       "taunt": true,
       "deathRattle": {
-        "class": "TargetlessActions.damageTarget",
-        "selector": "EntitySelectors.allTargetsAlive",
+        "method": "dealDamageToAll",
         "damage": 2
       }
     }
