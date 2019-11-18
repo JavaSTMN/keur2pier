@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 public abstract class Card implements Comparable<Card> {
 
     protected String name;
+    protected String description;
     protected int manaCost;
     protected String image;
     protected CardClass cardClass;
@@ -14,6 +15,7 @@ public abstract class Card implements Comparable<Card> {
 
     protected Card(JSONObject jsonObject){
         this.name = (String) jsonObject.getOrDefault("name", "Name");
+        this.description = (String) jsonObject.getOrDefault("description", "");
         this.manaCost = ((Long) jsonObject.getOrDefault("manaCost", 0L)).intValue();
         this.image = (String) jsonObject.getOrDefault("illustration", "default.png");
         this.cardClass = CardClass.valueOf((String) jsonObject.getOrDefault("cardClass", "NEUTRAL"));
@@ -31,6 +33,10 @@ public abstract class Card implements Comparable<Card> {
 
     public int getManaCost() {
         return manaCost;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public String getImage() {

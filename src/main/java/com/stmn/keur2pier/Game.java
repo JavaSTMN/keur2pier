@@ -90,4 +90,20 @@ public class Game {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public Player getOpponent(Player player){
+        if(player.equals(player1)){
+            return player2;
+        } else {
+            return player1;
+        }
+    }
 }
