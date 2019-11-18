@@ -24,7 +24,7 @@
       "taunt": true,
       "deathRattle": {
         "method": "dealDamageToAll",
-        "damage": "2"
+        "damage": 2
       }
     }
   },

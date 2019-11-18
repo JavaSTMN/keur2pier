@@ -1,8 +1,7 @@
 package com.stmn.keur2pier.card;
 
 import com.stmn.keur2pier.Player;
-import com.stmn.keur2pier.card.effect.BattleCry;
-import com.stmn.keur2pier.card.effect.DeathRattle;
+import com.stmn.keur2pier.card.effect.Abilities;
 import org.json.simple.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
@@ -51,7 +50,7 @@ public class MinionMechanics {
     public void battleCry(Player owner) {
         if(battleCry != null){
             try {
-                Method method = BattleCry.class.getMethod((String) battleCry.get("method"), owner.getClass(), battleCry.getClass());
+                Method method = Abilities.class.getMethod((String) battleCry.get("method"), owner.getClass(), battleCry.getClass());
                 method.invoke(battleCry.get("method"), owner, battleCry);
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
@@ -62,7 +61,7 @@ public class MinionMechanics {
     public void deathRattle(Player owner) {
         if(deathRattle != null){
             try {
-                Method method = DeathRattle.class.getMethod((String) deathRattle.get("method"), owner.getClass(), deathRattle.getClass());
+                Method method = Abilities.class.getMethod((String) deathRattle.get("method"), owner.getClass(), deathRattle.getClass());
                 method.invoke(deathRattle.get("method"), owner, deathRattle);
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();

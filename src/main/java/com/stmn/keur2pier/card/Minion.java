@@ -1,6 +1,5 @@
 package com.stmn.keur2pier.card;
 
-import com.stmn.keur2pier.Board;
 import com.stmn.keur2pier.IFighter;
 import com.stmn.keur2pier.Player;
 import org.json.simple.JSONObject;
@@ -88,10 +87,6 @@ public class Minion extends Card implements IFighter {
 
     public MinionMechanics getMinionMechanics() {
         return minionMechanics;
-    }
-
-    public int getHealth() {
-        return health;
     }
 
     public boolean isHasAttacked() {
