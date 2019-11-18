@@ -7,26 +7,19 @@ import java.util.List;
 
 public class Hand {
 
-    private final Player owner;
     private final int MAX_SIZE = 10;
     private List<Card> cards;
 
-    public Hand(Player owner) {
-        this.owner = owner;
+    public Hand() {
         this.cards = new ArrayList<>();
     }
 
-    public Hand(Player owner, List<Card> cards){
-        this.owner = owner;
+    public Hand(List<Card> cards){
         this.cards = cards;
     }
 
     public List<Card> getCards() {
         return cards;
-    }
-
-    public Player getOwner() {
-        return owner;
     }
 
     public int getCardCount(){
@@ -43,7 +36,7 @@ public class Hand {
 
     public boolean remove(Card card){
         for (Card c: cards) {
-            if (c.equals(card)){
+            if (c.compareTo(card) == 0){
                 return cards.remove(c);
             }
         }

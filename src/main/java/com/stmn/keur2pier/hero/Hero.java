@@ -1,6 +1,5 @@
 package com.stmn.keur2pier.hero;
 
-import com.stmn.keur2pier.Player;
 import com.stmn.keur2pier.card.Weapon;
 import com.stmn.keur2pier.IFighter;
 
@@ -14,19 +13,13 @@ public class Hero implements IFighter {
     private int armor;
     private HeroClass heroClass;
     private boolean hasAttacked;
-    private Player owner;
 
     public Hero(HeroClass heroClass) {
         this.heroClass = heroClass;
-    }
-
-    public Hero(HeroClass heroClass, Player owner) {
         this.weapon = null;
         this.health = MAX_HEALTH;
         this.armor = START_ARMOR;
-        this.heroClass = heroClass;
         this.hasAttacked = false;
-        this.owner = owner;
     }
 
     @Override
@@ -44,7 +37,7 @@ public class Hero implements IFighter {
         if(weapon != null && !hasAttacked){
             target.takeDamage(weapon.getAttack());
             takeDamage(target.getAttack());
-            weapon.loseDurability(1, owner);
+            weapon.loseDurability(1, this);
             hasAttacked = true;
         }
     }
@@ -52,8 +45,8 @@ public class Hero implements IFighter {
     @Override
     public void takeDamage(int damage) {
         armor -= damage;
-        if(armor <= 0) {
-            damage = armor;
+        if(armor < 0) {
+            damage = -armor;
             armor = 0;
         }
         health -= damage;
@@ -72,7 +65,7 @@ public class Hero implements IFighter {
 
     @Override
     public void die() {
-        owner.lose();
+
     }
 
     public Weapon getWeapon() {
@@ -98,4 +91,5 @@ public class Hero implements IFighter {
     public void setArmor(int armor) {
         this.armor = armor;
     }
+
 }

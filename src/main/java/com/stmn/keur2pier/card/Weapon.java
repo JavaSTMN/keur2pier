@@ -1,6 +1,7 @@
 package com.stmn.keur2pier.card;
 
 import com.stmn.keur2pier.Player;
+import com.stmn.keur2pier.hero.Hero;
 import org.json.simple.JSONObject;
 
 public class Weapon extends Card {
@@ -10,18 +11,17 @@ public class Weapon extends Card {
 
     public Weapon(JSONObject jsonObject) {
         super(jsonObject);
-        this.attack = (int) jsonObject.getOrDefault("attack", 0);
-        this.durability = (int) jsonObject.getOrDefault("health", 0);
+        this.attack = ((Long) jsonObject.getOrDefault("attack", 0L)).intValue();
+        this.durability = ((Long) jsonObject.getOrDefault("durability", 0L)).intValue();
     }
 
     @Override
     public void playCard(Player owner){
-        owner.getDeck().getHero().setWeapon(this);
+        owner.getHero().setWeapon(this);
     }
 
-    @Override
-    public void destroy(Player owner){
-        owner.getDeck().getHero().setWeapon(null);
+    public void destroy(Hero hero){
+        hero.setWeapon(null);
     }
 
     public void gainAttack(int value){
@@ -36,10 +36,10 @@ public class Weapon extends Card {
         durability += value;
     }
 
-    public void loseDurability(int value, Player owner){
+    public void loseDurability(int value, Hero hero){
         durability -= value;
         if(durability == 0){
-            destroy(owner);
+            destroy(hero);
         }
     }
 

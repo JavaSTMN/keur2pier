@@ -7,14 +7,21 @@ import org.json.simple.JSONObject;
 
 public class Minion extends Card implements IFighter {
 
-    private int healthPoint;
-    private int attackPoint;
+    private int health;
+    private int attack;
     private boolean hasAttacked;
+
+    private Mechanics mechanics;
 
     public Minion(JSONObject jsonObject) {
         super(jsonObject);
-        this.healthPoint = ((Long) jsonObject.getOrDefault("health", 0L)).intValue();
-        this.attackPoint = ((Long) jsonObject.getOrDefault("attack", 0L)).intValue();
+        this.health = ((Long) jsonObject.getOrDefault("health", 0L)).intValue();
+        this.attack = ((Long) jsonObject.getOrDefault("attack", 0L)).intValue();
+        if(jsonObject.containsKey("mechanics")){
+            this.mechanics = new Mechanics((JSONObject) jsonObject.get("mechanics"));
+        } else {
+            this.mechanics = null;
+        }
     }
 
     @Override
@@ -23,9 +30,8 @@ public class Minion extends Card implements IFighter {
         this.hasAttacked = true;
     }
 
-    @Override
-    public void destroy(Player owner){
-        owner.getBoard().removeMinion(this);
+    public void destroy(Board board){
+        board.removeMinion(this);
         die();
     }
 
@@ -41,22 +47,22 @@ public class Minion extends Card implements IFighter {
     @Override
     public void attack(IFighter target) {
         if(!hasAttacked) {
-            target.takeDamage(attackPoint);
+            target.takeDamage(attack);
             takeDamage(target.getAttack());
         }
     }
 
     @Override
     public void takeDamage(int damage) {
-        healthPoint -= damage;
-        if (healthPoint <= 0){
+        health -= damage;
+        if (health <= 0){
             die();
         }
     }
 
     @Override
     public int getAttack() {
-        return attackPoint;
+        return attack;
     }
 
     @Override

@@ -19,6 +19,8 @@ public class Game {
     private Player player1;
     private Player player2;
 
+    private Player currentPlayer;
+
     private Timer timer;
 
     synchronized public static Game getInstance(){
@@ -40,6 +42,8 @@ public class Game {
     }
 
     public void mulligan(){
+        player1.getDeck().shuffle();
+        player2.getDeck().shuffle();
         boolean random = new Random().nextBoolean();
         CardManager manager = new CardManager();
         Card theCoin = manager.getCardFromId("1");
@@ -57,6 +61,7 @@ public class Game {
     }
 
     public void startTurn(Player player){
+        currentPlayer = player;
         player.draw(1);
         if(player.getManaPool() < MANA_MAX) {
             player.setManaPool(player.getManaPool() + 1);
@@ -68,18 +73,21 @@ public class Game {
                 endTurn(player);
             }
         }, 2*60*1000);
-        //Donner la main au joueur
     }
 
     public void endTurn(Player player){
         if(player.equals(player1)){
-            player2.startTurn();
+            startTurn(player2);
         } else {
-            player2.startTurn();
+            startTurn(player1);
         }
     }
 
     public void endGame(Player loser){
         timer.cancel();
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 }

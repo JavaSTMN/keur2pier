@@ -20,7 +20,21 @@ public class CardManager {
     }
 
     public Card getCardFromId(String id){
-        return new Spell((JSONObject) cards.get(id));
+        JSONObject card = (JSONObject) cards.get(id);
+        return createFromJSON(card);
+    }
+    public Card createFromJSON(JSONObject card){
+        switch ((String) card.get("type")){
+            case "MINION":
+                return new Minion(card);
+
+            case "SPELL":
+                return new Spell(card);
+
+            case "WEAPON":
+                return new Weapon(card);
+        }
+        return null;
     }
 
     private JSONObject readFromJSON() throws IOException, ParseException {

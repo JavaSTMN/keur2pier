@@ -2,6 +2,7 @@ package com.stmn.keur2pier;
 
 import com.stmn.keur2pier.card.Card;
 import com.stmn.keur2pier.deck.Deck;
+import com.stmn.keur2pier.hero.Hero;
 
 public class Player {
 
@@ -11,30 +12,31 @@ public class Player {
     private int manaRemaining;
     private Hand hand;
     private Deck deck;
+    private Hero hero;
     private Board board;
     private int fatigue;
 
     public Player(Deck deck){
         this.deck = deck;
-        this.hand = new Hand(this);
+        this.hero = new Hero(deck.getHeroClass());
+        this.hand = new Hand();
         this.board = new Board();
         this.manaPool = START_MANA;
         this.fatigue = 0;
-    }
-
-    public void startTurn(){
-        draw(1);
     }
 
     public void lose(){
         Game.getInstance().endGame(this);
     }
 
-    public void playCard(Card card){
-        assert (manaRemaining - card.getManaCost() >=0);
-        hand.remove(card);
-        card.playCard(this);
-        manaRemaining -= card.getManaCost();
+    public boolean playCard(Card card){
+        if(manaRemaining - card.getManaCost() >=0){
+            hand.remove(card);
+            card.playCard(this);
+            manaRemaining -= card.getManaCost();
+            return true;
+        }
+        return false;
     }
 
     public void draw(int number){
@@ -44,7 +46,7 @@ public class Player {
                 hand.addCard(card);
             } else {
                 fatigue++;
-                deck.getHero().takeDamage(fatigue);
+                hero.takeDamage(fatigue);
             }
         }
     }
@@ -75,5 +77,9 @@ public class Player {
 
     public void setManaRemaining(int manaRemaining) {
         this.manaRemaining = manaRemaining;
+    }
+
+    public Hero getHero() {
+        return hero;
     }
 }
