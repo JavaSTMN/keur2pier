@@ -1,8 +1,8 @@
-import com.stmn.keur2pier.card.CardManager;
-import com.stmn.keur2pier.deck.Deck;
-import com.stmn.keur2pier.deck.DeckManager;
-import com.stmn.keur2pier.hero.HeroClass;
-import com.stmn.keur2pier.util.JSONUtils;
+import models.card.CardManager;
+import models.deck.Deck;
+import models.deck.DeckManager;
+import models.hero.HeroClass;
+import helpers.JSONHelper;
 import org.junit.Test;
 
 import java.io.File;
@@ -22,6 +22,16 @@ public class DeckTest {
         deckManager.addCard(paulDeck, cardManager.getCardFromId("5"));
         deckManager.addCard(paulDeck, cardManager.getCardFromId("6"));
         deckManager.addCard(paulDeck, cardManager.getCardFromId("7"));
+        deckManager.addCard(paulDeck, cardManager.getCardFromId("8"));
+        deckManager.addCard(paulDeck, cardManager.getCardFromId("9"));
+        deckManager.addCard(paulDeck, cardManager.getCardFromId("10"));
+        deckManager.addCard(paulDeck, cardManager.getCardFromId("11"));
+        deckManager.addCard(paulDeck, cardManager.getCardFromId("12"));
+        deckManager.addCard(paulDeck, cardManager.getCardFromId("13"));
+        deckManager.addCard(paulDeck, cardManager.getCardFromId("14"));
+        deckManager.addCard(paulDeck, cardManager.getCardFromId("15"));
+        deckManager.addCard(paulDeck, cardManager.getCardFromId("16"));
+        deckManager.addCard(paulDeck, cardManager.getCardFromId("17"));
         deckManager.createDeck(paulDeck);
 
         Deck nathanDeck = new Deck("Nathan", HeroClass.WARLOCK);
@@ -31,10 +41,20 @@ public class DeckTest {
         deckManager.addCard(nathanDeck, cardManager.getCardFromId("5"));
         deckManager.addCard(nathanDeck, cardManager.getCardFromId("6"));
         deckManager.addCard(nathanDeck, cardManager.getCardFromId("7"));
+        deckManager.addCard(nathanDeck, cardManager.getCardFromId("8"));
+        deckManager.addCard(nathanDeck, cardManager.getCardFromId("9"));
+        deckManager.addCard(nathanDeck, cardManager.getCardFromId("10"));
+        deckManager.addCard(nathanDeck, cardManager.getCardFromId("11"));
+        deckManager.addCard(nathanDeck, cardManager.getCardFromId("12"));
+        deckManager.addCard(nathanDeck, cardManager.getCardFromId("13"));
+        deckManager.addCard(nathanDeck, cardManager.getCardFromId("14"));
+        deckManager.addCard(nathanDeck, cardManager.getCardFromId("15"));
+        deckManager.addCard(nathanDeck, cardManager.getCardFromId("16"));
+        deckManager.addCard(nathanDeck, cardManager.getCardFromId("17"));
         deckManager.createDeck(nathanDeck);
 
         deckManager.writeToJSON();
-        assertNotNull(JSONUtils.readJSON(new File("src/main/resources/json/decks").getAbsolutePath()));
+        assertNotNull(JSONHelper.readJSON(new File("src/main/resources/json/decks").getAbsolutePath()));
     }
 
     @Test

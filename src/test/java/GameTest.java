@@ -1,6 +1,6 @@
-import com.stmn.keur2pier.Game;
-import com.stmn.keur2pier.Player;
-import com.stmn.keur2pier.deck.DeckManager;
+import models.Game;
+import models.Player;
+import models.deck.DeckManager;
 import org.junit.Test;
 
 public class GameTest {
@@ -30,6 +30,7 @@ public class GameTest {
         game.endTurn(currentPlayer);
         currentPlayer = game.getCurrentPlayer();
         game.endTurn(currentPlayer);
+        currentPlayer.lose();
     }
 
 }
