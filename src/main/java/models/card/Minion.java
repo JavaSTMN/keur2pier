@@ -1,5 +1,6 @@
 package models.card;
 
+import models.Game;
 import models.IFighter;
 import models.Player;
 import org.json.simple.JSONObject;
@@ -44,7 +45,6 @@ public class Minion extends Card implements IFighter {
             minionMechanics.deathRattle(owner);
         }
         owner.getBoard().removeMinion(this);
-        die();
         update();
     }
 
@@ -60,11 +60,11 @@ public class Minion extends Card implements IFighter {
 
     @Override
     public void attack(IFighter target) {
-        if(!hasAttacked) {
+        //if(!hasAttacked) {
             target.takeDamage(attack);
             takeDamage(target.getAttack());
             hasAttacked = true;
-        }
+        //}
         update();
     }
 
@@ -88,7 +88,7 @@ public class Minion extends Card implements IFighter {
 
     @Override
     public void die() {
-
+        destroy(Game.getInstance().getCardOwner(this));
     }
 
     public MinionMechanics getMinionMechanics() {

@@ -1,6 +1,7 @@
 package views.layouts;
 
 import models.Hand;
+import models.Player;
 import models.card.Card;
 
 import javax.swing.*;
@@ -13,8 +14,12 @@ public class HandLayout extends JPanel implements Observer {
     private JPanel cardContainer;
     private JPanel handContainer;
 
-    public HandLayout(Hand hand) {
+    private Player player;
+
+    public HandLayout(Player player, Hand hand) {
         hand.addObserver(this);
+
+        this.player = player;
 
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBackground(Color.DARK_GRAY);
@@ -28,7 +33,7 @@ public class HandLayout extends JPanel implements Observer {
         cardContainer.setBackground(Color.DARK_GRAY);
 
         for (Card card : hand.getCards()) {
-            cardContainer.add(new CardLayout(card));
+            cardContainer.add(new CardLayout(player, card));
         }
 
         handContainer.add(cardContainer);
@@ -40,7 +45,7 @@ public class HandLayout extends JPanel implements Observer {
         Hand hand = (Hand) o;
         cardContainer.removeAll();
         for (Card card : hand.getCards()) {
-            cardContainer.add(new CardLayout(card));
+            cardContainer.add(new CardLayout(player, card));
         }
         repaint();
         revalidate();

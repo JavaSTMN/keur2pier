@@ -3,6 +3,7 @@ package views;
 import models.Game;
 import models.Player;
 import views.layouts.BoardLayout;
+import views.layouts.CardBoardLayout;
 import views.layouts.CardLayout;
 import views.layouts.PlayerLayout;
 
@@ -24,6 +25,7 @@ public class GameView extends JFrame implements Observer {
     private BoardLayout boardPlayer2;
 
     private CardLayout selectedCard;
+    private CardBoardLayout selectedCardBoard;
 
     private static GameView gameViewObject;
 
@@ -43,8 +45,8 @@ public class GameView extends JFrame implements Observer {
         Game.getInstance().addObserver(this);
         playerLayout1 = new PlayerLayout(player1);
         playerLayout2 = new PlayerLayout(player2);
-        boardPlayer1 = new BoardLayout(player1.getBoard());
-        boardPlayer2 = new BoardLayout(player2.getBoard());
+        boardPlayer1 = new BoardLayout(player1, player1.getBoard());
+        boardPlayer2 = new BoardLayout(player2, player2.getBoard());
 
         board = new JPanel();
         board.setLayout(new BoxLayout(board, BoxLayout.PAGE_AXIS));
@@ -76,6 +78,14 @@ public class GameView extends JFrame implements Observer {
         this.selectedCard = selectedCard;
     }
 
+    public CardBoardLayout getSelectedCardBoard() {
+        return selectedCardBoard;
+    }
+
+    public void setSelectedCardBoard(CardBoardLayout selectedCardBoard) {
+        this.selectedCardBoard = selectedCardBoard;
+    }
+
     public PlayerLayout getPlayerLayout1() {
         return playerLayout1;
     }
@@ -94,6 +104,8 @@ public class GameView extends JFrame implements Observer {
 
     @Override
     public void update(Observable observable, Object o) {
+        selectedCard = null;
+        selectedCardBoard = null;
         repaint();
         revalidate();
     }

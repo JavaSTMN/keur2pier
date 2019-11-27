@@ -29,6 +29,7 @@ public class NextTurnLayout extends JPanel {
             if(Game.getInstance().getCurrentPlayer() == this.player){
                 Game.getInstance().endTurn(this.player);
             }
+            player.getBoard().update();
         });
         add(nextTurn);
     }

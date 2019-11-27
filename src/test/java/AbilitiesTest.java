@@ -148,4 +148,14 @@ public class AbilitiesTest {
         //TODO
     }
 
+    @Test
+    public void dealDamageToRandomAH(){
+        Card AH = cardManager.getCardFromId("2");
+        Player player = game.getCurrentPlayer();
+        player.getHand().addCard(AH);
+        List<Card> hand = player.getHand().getCards();
+        player.playCard(hand.get(hand.size() - 1));
+        assertEquals(27, Game.getInstance().getOpponent(player).getHero().getHealth());
+    }
+
 }

@@ -108,4 +108,11 @@ public class Game extends Observable {
             return player1;
         }
     }
+
+    public Player getCardOwner(Card card){
+        if(player1.getBoard().getMinions().contains(card)){
+            return player1;
+        }
+        return player2;
+    }
 }

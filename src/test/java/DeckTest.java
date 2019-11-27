@@ -27,7 +27,6 @@ public class DeckTest {
         deckManager.addCard(paulDeck, cardManager.getCardFromId("10"));
         deckManager.addCard(paulDeck, cardManager.getCardFromId("11"));
         deckManager.addCard(paulDeck, cardManager.getCardFromId("12"));
-        deckManager.addCard(paulDeck, cardManager.getCardFromId("13"));
         deckManager.addCard(paulDeck, cardManager.getCardFromId("14"));
         deckManager.addCard(paulDeck, cardManager.getCardFromId("15"));
         deckManager.addCard(paulDeck, cardManager.getCardFromId("16"));
@@ -46,7 +45,6 @@ public class DeckTest {
         deckManager.addCard(nathanDeck, cardManager.getCardFromId("10"));
         deckManager.addCard(nathanDeck, cardManager.getCardFromId("11"));
         deckManager.addCard(nathanDeck, cardManager.getCardFromId("12"));
-        deckManager.addCard(nathanDeck, cardManager.getCardFromId("13"));
         deckManager.addCard(nathanDeck, cardManager.getCardFromId("14"));
         deckManager.addCard(nathanDeck, cardManager.getCardFromId("15"));
         deckManager.addCard(nathanDeck, cardManager.getCardFromId("16"));

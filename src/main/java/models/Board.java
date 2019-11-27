@@ -25,8 +25,7 @@ public class Board extends Observable {
                 tauntList.add(minion);
             }
         }
-        setChanged();
-        notifyObservers(this);
+        update();
     }
 
     public void removeMinion(Minion minion){
@@ -34,8 +33,7 @@ public class Board extends Observable {
         if(minion.getMinionMechanics().isTaunt()){
             tauntList.remove(minion);
         }
-        setChanged();
-        notifyObservers(this);
+        update();
     }
 
     public List<Minion> getAttackableMinions(){
@@ -51,6 +49,11 @@ public class Board extends Observable {
 
     public List<Minion> getTauntList() {
         return tauntList;
+    }
+
+    public void update(){
+        setChanged();
+        notifyObservers(this);
     }
 
 }

@@ -15,7 +15,7 @@ public class PlayerLayout extends JPanel {
 
         add(horizontalBox);
         horizontalBox.add(new HeroLayout(player.getHero()));
-        horizontalBox.add(new HandLayout(player.getHand()));
+        horizontalBox.add(new HandLayout(player, player.getHand()));
         horizontalBox.add(new DeckLayout(player.getDeck()));
         horizontalBox.add(new ManaLayout(player));
         horizontalBox.add(new NextTurnLayout(player));
