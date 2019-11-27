@@ -81,7 +81,10 @@ public class Abilities {
      */
     public static void summonMinions(Player owner, JSONObject effect){
         CardManager cardManager = new CardManager();
-        owner.getBoard().addMinion(new Minion(cardManager.getJSONFromId((String) effect.get("minionId"))));
+        int amount = ((Long)effect.get("amount")).intValue();
+        for (int i = 0; i < amount; i++){
+            owner.getBoard().addMinion(new Minion(cardManager.getJSONFromId(((Long) effect.get("minionId")).toString())));
+        }
     }
 
     /**

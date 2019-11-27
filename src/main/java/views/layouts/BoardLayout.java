@@ -2,6 +2,7 @@ package views.layouts;
 
 import models.Board;
 import models.Game;
+import models.Player;
 import models.card.*;
 import views.GameView;
 
@@ -14,14 +15,19 @@ import java.util.Observer;
 
 public class BoardLayout extends JPanel implements Observer, MouseListener {
 
-    public BoardLayout(Board board) {
+    private Player player;
+    private Board board;
+
+    public BoardLayout(Player player, Board board) {
+        this.board = board;
+        this.player = player;
         board.addObserver(this);
         setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
         setBackground(new Color(207, 204, 141));
         setLayout(new FlowLayout(FlowLayout.CENTER));
 
         for(Card card: board.getMinions()) {
-            CardLayout cardLayout = new CardLayout(card);
+            CardBoardLayout cardLayout = new CardBoardLayout(player, card);
             add(cardLayout);
         }
         addMouseListener(this);
@@ -32,7 +38,7 @@ public class BoardLayout extends JPanel implements Observer, MouseListener {
         Board board = (Board) o;
         removeAll();
         for (Card card: board.getMinions()) {
-            add(new CardLayout(card));
+            add(new CardBoardLayout(player, card));
         }
         repaint();
         revalidate();
@@ -43,11 +49,7 @@ public class BoardLayout extends JPanel implements Observer, MouseListener {
         CardLayout cardLayout = GameView.getInstance().getSelectedCard();
         if(cardLayout != null){
             Game.getInstance().getCurrentPlayer().playCard(cardLayout.getCard());
-        }
-
-        if (mouseEvent.getSource() instanceof CardLayout){
-            cardLayout = (CardLayout) mouseEvent.getSource();
-            cardLayout.setWaitingForTarget(!cardLayout.isWaitingForTarget());
+            GameView.getInstance().setSelectedCard(null);
         }
     }
 

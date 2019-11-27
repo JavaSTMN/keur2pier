@@ -70,6 +70,8 @@ public class Player extends Observable {
 
     public void setManaPool(int manaPool) {
         this.manaPool = manaPool;
+        setChanged();
+        notifyObservers(this);
     }
 
     public int getManaRemaining() {
@@ -78,6 +80,8 @@ public class Player extends Observable {
 
     public void setManaRemaining(int manaRemaining) {
         this.manaRemaining = manaRemaining;
+        setChanged();
+        notifyObservers(this);
     }
 
     public Hero getHero() {

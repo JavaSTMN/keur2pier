@@ -7,7 +7,7 @@
     "manaCost": 0,
     "type": "SPELL",
     "mechanics": {
-      "method": "gainMana",
+      "method": "addManaForTurn",
       "amount": 1
     },
     "image": "doge_coin.png"
@@ -109,7 +109,7 @@
     "image": "big_shak.jpg"
   },
   "8": {
-   "name": "Crak Kid",
+   "name": "Crack Kid",
    "description": "YAAAAAAAH.",
    "cardClass": "NEUTRAL",
    "rarity": "LEGENDARY",
@@ -133,10 +133,8 @@
    "manaCost": 3,
    "type": "SPELL",
    "mechanics": {
-     "battleCry": {
-       "method": "dealDamageRepeatable",
-       "damage": 2
-     }
+     "method": "dealDamageRepeatable",
+     "damage": 2
    },
    "image": "darude.jpg"
   },
@@ -151,7 +149,11 @@
    "health": 2,
    "mechanics": {
     "charge": true,
-    "divineShield": true
+    "divineShield": true,
+     "battleCry": {
+       "method": "addEmptyMana",
+       "amount": 1
+     }
    },
    "image": "dolan.jpg"
   },
@@ -180,10 +182,9 @@
    "manaCost": 1,
    "type": "SPELL",
    "mechanics": {
-     "battleCry": {
-       "method": "summonMinions",
-       "minionId": 13
-     }
+     "method": "summonMinions",
+     "amount": 2,
+     "minionId": 13
    },
    "image": "gae.jpg"
   },

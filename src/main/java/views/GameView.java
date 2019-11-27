@@ -3,13 +3,16 @@ package views;
 import models.Game;
 import models.Player;
 import views.layouts.BoardLayout;
+import views.layouts.CardBoardLayout;
 import views.layouts.CardLayout;
 import views.layouts.PlayerLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class GameView extends JFrame {
+public class GameView extends JFrame implements Observer {
 
     private JFrame window;
     private JPanel gameView;
@@ -22,6 +25,7 @@ public class GameView extends JFrame {
     private BoardLayout boardPlayer2;
 
     private CardLayout selectedCard;
+    private CardBoardLayout selectedCardBoard;
 
     private static GameView gameViewObject;
 
@@ -38,11 +42,11 @@ public class GameView extends JFrame {
 
     public void init(Player player1, Player player2) {
         Game.getInstance().startGame(player1, player2);
-
+        Game.getInstance().addObserver(this);
         playerLayout1 = new PlayerLayout(player1);
         playerLayout2 = new PlayerLayout(player2);
-        boardPlayer1 = new BoardLayout(player1.getBoard());
-        boardPlayer2 = new BoardLayout(player2.getBoard());
+        boardPlayer1 = new BoardLayout(player1, player1.getBoard());
+        boardPlayer2 = new BoardLayout(player2, player2.getBoard());
 
         board = new JPanel();
         board.setLayout(new BoxLayout(board, BoxLayout.PAGE_AXIS));
@@ -74,6 +78,14 @@ public class GameView extends JFrame {
         this.selectedCard = selectedCard;
     }
 
+    public CardBoardLayout getSelectedCardBoard() {
+        return selectedCardBoard;
+    }
+
+    public void setSelectedCardBoard(CardBoardLayout selectedCardBoard) {
+        this.selectedCardBoard = selectedCardBoard;
+    }
+
     public PlayerLayout getPlayerLayout1() {
         return playerLayout1;
     }
@@ -88,5 +100,13 @@ public class GameView extends JFrame {
 
     public BoardLayout getBoardPlayer2() {
         return boardPlayer2;
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        selectedCard = null;
+        selectedCardBoard = null;
+        repaint();
+        revalidate();
     }
 }

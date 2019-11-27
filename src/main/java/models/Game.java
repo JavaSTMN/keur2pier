@@ -3,11 +3,12 @@ package models;
 import models.card.Card;
 import models.card.CardManager;
 
+import java.util.Observable;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Game {
+public class Game extends Observable {
 
     private static final int MANA_MAX = 10;
 
@@ -64,15 +65,18 @@ public class Game {
             player.setManaPool(player.getManaPool() + 1);
         }
         player.setManaRemaining(player.getManaPool());
+        setChanged();
+        notifyObservers(this);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 endTurn(player);
             }
-        }, 2*60*1000);
+        }, 2*60*1000); // 2 Minutes
     }
 
     public void endTurn(Player player){
+        timer.cancel();
         if(player.equals(player1)){
             startTurn(player2);
         } else {
@@ -103,5 +107,12 @@ public class Game {
         } else {
             return player1;
         }
+    }
+
+    public Player getCardOwner(Card card){
+        if(player1.getBoard().getMinions().contains(card)){
+            return player1;
+        }
+        return player2;
     }
 }
