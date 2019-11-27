@@ -8,8 +8,10 @@ import views.layouts.PlayerLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class GameView extends JFrame {
+public class GameView extends JFrame implements Observer {
 
     private JFrame window;
     private JPanel gameView;
@@ -38,7 +40,7 @@ public class GameView extends JFrame {
 
     public void init(Player player1, Player player2) {
         Game.getInstance().startGame(player1, player2);
-
+        Game.getInstance().addObserver(this);
         playerLayout1 = new PlayerLayout(player1);
         playerLayout2 = new PlayerLayout(player2);
         boardPlayer1 = new BoardLayout(player1.getBoard());
@@ -88,5 +90,11 @@ public class GameView extends JFrame {
 
     public BoardLayout getBoardPlayer2() {
         return boardPlayer2;
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        repaint();
+        revalidate();
     }
 }

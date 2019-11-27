@@ -14,7 +14,10 @@ import java.util.Observer;
 
 public class BoardLayout extends JPanel implements Observer, MouseListener {
 
+    private Board board;
+
     public BoardLayout(Board board) {
+        this.board = board;
         board.addObserver(this);
         setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
         setBackground(new Color(207, 204, 141));

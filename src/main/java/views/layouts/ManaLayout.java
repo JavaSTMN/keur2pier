@@ -27,7 +27,12 @@ public class ManaLayout extends JPanel implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         Player player = (Player) o;
+        removeAll();
         manaView = new JLabel("MANA: " + player.getManaRemaining() + "/" + player.getManaPool());
+        manaView.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
+        manaView.setForeground(Color.WHITE);
+        manaView.setBackground(Color.DARK_GRAY);
+        add(manaView);
         repaint();
         revalidate();
     }
